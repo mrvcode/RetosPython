@@ -1,3 +1,6 @@
+import random
+
+
 class ChristmasTree:
 
     def __init__(self, height: int):
@@ -42,7 +45,20 @@ class ChristmasTree:
             print("Se ha quitado una estrella del árbol.")
 
     def add_balls(self):
-        pass
+        available = [
+            (i, j)
+            for i in range(1, self.height)
+            for j in range(self.height - i - 1, self.height + i)
+            if self.tree[i][j] == "*"
+        ]
+
+        if len(available) < 2:
+            print("No hay suficiente espacio para añadir más bolas.")
+        else:
+            selected = random.sample(available, 2)
+            for i, j in selected:
+                self.tree[i][j] = "o"
+            print("Se han añadido 2 bolas al árbol")
 
     def remove_balls(self):
         pass
