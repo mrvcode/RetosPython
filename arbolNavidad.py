@@ -99,12 +99,16 @@ class ChristmasTree:
         print(f"Las luces fueron {'encendidas' if turn_on else 'apagadas'}.")
 
     def available(self):
-        return [
+        available = [
             (i, j)
             for i in range(1, self.height)
             for j in range(self.height - i - 1, self.height + i)
             if self.tree[i][j] == "*"
         ]
+        if not self.lights_on:
+            for i, j in self.lights:
+                available.remove((i, j))
+        return available
 
 
 height = input("Introduce la altura del árbol: ")
