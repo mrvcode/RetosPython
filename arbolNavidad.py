@@ -16,16 +16,35 @@ class ChristmasTree:
             for j in range(height - 2, height + 1):
                 self.trunk[i][j] = "|"
 
+        self.star = False
+
     def display_tree(self):
-        for i, row in enumerate(self.tree):
-            print("".join(row))
+        for index, row in enumerate(self.tree):
+            if index == 0 and self.star:
+                print("".join(row).replace("*", "@"))
+            else:
+                print("".join(row))
         for row in self.trunk:
             print("".join(row))
 
     def add_start(self):
-        pass
+        if self.star:
+            print("Ya hay una estrella en el árbol.")
+        else:
+            self.star = True
+            print("Se ha puesto la estrella en el árbol.")
 
     def remove_star(self):
+        if not self.star:
+            print("No existe una estrella en el árbol para quitar.")
+        else:
+            self.star = False
+            print("Se ha quitado una estrella del árbol.")
+
+    def add_balls(self):
+        pass
+
+    def remove_balls(self):
         pass
 
 
@@ -58,9 +77,9 @@ if height.isdigit() and int(height) > 1:
             case "2":
                 tree.remove_star()
             case "3":
-                pass
+                tree.add_balls()
             case "4":
-                pass
+                tree.remove_balls()
             case "5":
                 pass
             case "6":
