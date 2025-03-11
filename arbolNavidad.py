@@ -20,6 +20,9 @@ class ChristmasTree:
                 self.trunk[i][j] = "|"
 
         self.star = False
+        self.balls = []
+        self.lights = []
+        self.lights_on = False
 
     def display_tree(self):
         for index, row in enumerate(self.tree):
@@ -45,23 +48,63 @@ class ChristmasTree:
             print("Se ha quitado una estrella del árbol.")
 
     def add_balls(self):
-        available = [
-            (i, j)
-            for i in range(1, self.height)
-            for j in range(self.height - i - 1, self.height + i)
-            if self.tree[i][j] == "*"
-        ]
-
+        available = self.available()
         if len(available) < 2:
             print("No hay suficiente espacio para añadir más bolas.")
         else:
             selected = random.sample(available, 2)
             for i, j in selected:
                 self.tree[i][j] = "o"
+                self.balls.append((i, j))
             print("Se han añadido 2 bolas al árbol")
 
     def remove_balls(self):
-        pass
+        if len(self.balls) < 2:
+            print("No hay suficientes bolas para quitar")
+        else:
+            selected = random.sample(self.balls, 2)
+            for i, j in selected:
+                self.tree[i][j] = "*"
+                self.balls.remove((i, j))
+            print("Se han eliminado 2 bolas del árbol")
+
+    def add_lights(self):
+        available = self.available()
+        if len(available) < 3:
+            print("No hay suficiente espacio para añadir más luces.")
+        else:
+            selected = random.sample(available, 3)
+            for i, j in selected:
+                self.tree[i][j] = "+" if self.lights_on else "*"
+                self.lights.append((i, j))
+            print("Se han añadido 3 luces al árbol")
+
+    def remove_lights(self):
+        if len(self.lights) < 3:
+            print("No hay suficientes luces para quitar")
+        else:
+            selected = random.sample(self.lights, 3)
+            for i, j in selected:
+                self.tree[i][j] = "*"
+                self.lights.remove((i, j))
+            print("Se han eliminado 3 luces del árbol")
+
+    def toggle_lights(self, turn_on):
+        if not self.lights:
+            print("No hay luces en el árbol.")
+
+        self.lights_on = turn_on
+        for i, j in self.lights:
+            self.tree[i][j] = "+" if turn_on else "*"
+        print(f"Las luces fueron {'encendidas' if turn_on else 'apagadas'}.")
+
+    def available(self):
+        return [
+            (i, j)
+            for i in range(1, self.height)
+            for j in range(self.height - i - 1, self.height + i)
+            if self.tree[i][j] == "*"
+        ]
 
 
 height = input("Introduce la altura del árbol: ")
@@ -97,13 +140,13 @@ if height.isdigit() and int(height) > 1:
             case "4":
                 tree.remove_balls()
             case "5":
-                pass
+                tree.add_lights()
             case "6":
-                pass
+                tree.remove_lights()
             case "7":
-                pass
+                tree.toggle_lights(True)
             case "8":
-                pass
+                tree.toggle_lights(False)
             case "9":
                 print("Saliendo del programa...")
                 break
