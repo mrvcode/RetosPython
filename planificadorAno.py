@@ -73,7 +73,7 @@ def calculate_detail_plan(goals: list[Goal]) -> dict:
         for month in range(1, goal.limit + 1):
 
             plan[month].append(
-                Goal(goal.goal_name, month_amount, goal.units, goal.amount)
+                Goal(goal.goal_name, round(month_amount, 2), goal.units, goal.amount)
             )
     return plan
 
@@ -86,7 +86,7 @@ def show_detailed_plan(plan: dict):
             # No hay objetivos en este mes
             break
 
-        print(f"{MONTH[month - 1]}: ")
+        print(f"\n{MONTH[month - 1]}: ")
 
         for index, goal in enumerate(plan[month], start=1):
             print(
@@ -100,7 +100,7 @@ def save_detail_plan(plan: dict):
 
     with open(file_path, "w", encoding="utf-8") as file:
 
-        file.write("Plan detallado")
+        file.write("Plan detallado:\n")
 
         for month in range(1, len(MONTH) + 1):
 
@@ -108,7 +108,7 @@ def save_detail_plan(plan: dict):
                 # No hay objetivos en este mes
                 break
 
-            file.write(f"{MONTH[month - 1]}:\n")
+            file.write(f"\n{MONTH[month - 1]}:\n")
 
             for index, goal in enumerate(plan[month], start=1):
                 file.write(

@@ -1,0 +1,40 @@
+Plan detallado:
+
+Enero:
+[ ] 1. Leer libros (3.3 libros/mes). Total: 10.
+[ ] 2. Aprender Pyhton (0.1 curso/mes). Total: 1.
+
+Febrero:
+[ ] 1. Leer libros (3.3 libros/mes). Total: 10.
+[ ] 2. Aprender Pyhton (0.1 curso/mes). Total: 1.
+
+Marzo:
+[ ] 1. Leer libros (3.3 libros/mes). Total: 10.
+[ ] 2. Aprender Pyhton (0.1 curso/mes). Total: 1.
+
+Abril:
+[ ] 1. Aprender Pyhton (0.1 curso/mes). Total: 1.
+
+Mayo:
+[ ] 1. Aprender Pyhton (0.1 curso/mes). Total: 1.
+
+Junio:
+[ ] 1. Aprender Pyhton (0.1 curso/mes). Total: 1.
+
+Julio:
+[ ] 1. Aprender Pyhton (0.1 curso/mes). Total: 1.
+
+Agosto:
+[ ] 1. Aprender Pyhton (0.1 curso/mes). Total: 1.
+
+Septiembre:
+[ ] 1. Aprender Pyhton (0.1 curso/mes). Total: 1.
+
+Octubre:
+[ ] 1. Aprender Pyhton (0.1 curso/mes). Total: 1.
+
+Noviembre:
+[ ] 1. Aprender Pyhton (0.1 curso/mes). Total: 1.
+
+Diciembre:
+[ ] 1. Aprender Pyhton (0.1 curso/mes). Total: 1.
