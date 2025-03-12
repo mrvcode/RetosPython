@@ -1,3 +1,5 @@
+import os
+
 MONTH = [
     "Enero",
     "Febrero",
@@ -64,8 +66,6 @@ def calculate_detail_plan(goals: list[Goal]) -> dict:
 
     plan = {month: [] for month in range(1, len(MONTH) + 1)}
 
-    print(plan)
-
     for goal in goals:
 
         month_amount = goal.amount / goal.limit
@@ -85,6 +85,36 @@ def show_detailed_plan(plan: dict):
         if not plan[month]:
             # No hay objetivos en este mes
             break
+
+        print(f"{MONTH[month - 1]}: ")
+
+        for index, goal in enumerate(plan[month], start=1):
+            print(
+                f"[ ] {index}. {goal.goal_name} ({goal.amount} {goal.units}/mes). Total: {goal.limit}."
+            )
+
+
+def save_detail_plan(plan: dict):
+
+    file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "plant.txt")
+
+    with open(file_path, "w", encoding="utf-8") as file:
+
+        file.write("Plan detallado")
+
+        for month in range(1, len(MONTH) + 1):
+
+            if not plan[month]:
+                # No hay objetivos en este mes
+                break
+
+            file.write(f"{MONTH[month - 1]}:\n")
+
+            for index, goal in enumerate(plan[month], start=1):
+                file.write(
+                    f"[ ] {index}. {goal.goal_name} ({goal.amount} {goal.units}/mes). Total: {goal.limit}.\n"
+                )
+    print(f"Plan guardado con éxito en {file_path}")
 
 
 goals = []
@@ -107,15 +137,15 @@ while True:
         if len(goals) == 0:
             print("No hay objetivos añadidos.")
         else:
-            plan = calculate_detail_plan()
+            plan = calculate_detail_plan(goals)
             show_detailed_plan(plan)
 
     elif option == "3":
         if len(goals) == 0:
             print("No hay objetivos para guardar.")
         else:
-            pass
-            # save_detail_plan()
+            plan = calculate_detail_plan(goals)
+            save_detail_plan(plan)
 
     elif option == "4":
         print("Saliendo del planificador....")
