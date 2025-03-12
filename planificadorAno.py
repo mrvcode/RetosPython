@@ -1,11 +1,23 @@
+MONTH = [
+    "Enero",
+    "Febrero",
+    "Marzo",
+    "Abril",
+    "Mayo",
+    "Junio",
+    "Julio",
+    "Agosto",
+    "Septiembre",
+    "Octubre",
+    "Noviembre",
+    "Diciembre",
+]
 
 
-
-
-def show_menu()
+def show_menu():
     print("\nPlanificación de objetivos:")
     print("1.Añadir objetivo")
-    print("2.Calcular el plan detalla do")
+    print("2.Calcular el plan detallado")
     print("3.Guardar la planificación")
     print("4.Salir")
 
@@ -19,15 +31,63 @@ class Goal:
         self.limit = limit
 
 
-def add_goal():
+def request_goal() -> Goal:
 
     goal_name = input("Meta: ")
-    amount = input("Cantidad: ")
-    unit = input("Unidades: ")
-    limit = input("Plazos en meses (máximo 12): ")
+
+    while True:
+        try:
+            amount = int(input("Cantidad: "))
+            if amount <= 0:
+                print("La cantidad debe de ser un número positivo.")
+                continue
+            break
+        except:
+            print("Por favor introduce un número entero valido.")
+
+    units = input("Unidades: ")
+
+    while True:
+        try:
+            limit = int(input("Plazos en meses (máximo 12): "))
+            if limit <= 0 or limit > len(MONTH):
+                print("Por favor introduce un número entre 1 y 12 meses.")
+                continue
+            break
+        except:
+            print("Por favor introduce un número entre 1 y 12 meses.")
+
+    return Goal(goal_name, amount, units, limit)
 
 
+def calculate_detail_plan(goals: list[Goal]) -> dict:
 
+    plan = {month: [] for month in range(1, len(MONTH) + 1)}
+
+    print(plan)
+
+    for goal in goals:
+
+        month_amount = goal.amount / goal.limit
+
+        for month in range(1, goal.limit + 1):
+
+            plan[month].append(
+                Goal(goal.goal_name, month_amount, goal.units, goal.amount)
+            )
+    return plan
+
+
+def show_detailed_plan(plan: dict):
+
+    for month in range(1, len(MONTH) + 1):
+
+        if not plan[month]:
+            # No hay objetivos en este mes
+            break
+
+
+goals = []
 
 while True:
 
@@ -36,11 +96,27 @@ while True:
     option = input("Elige una opción: ")
 
     if option == "1":
-        add_goal()
+        if len(goals) > 10:
+            print("Has alcanzado el máximo numero de objetivos")
+        else:
+            goal = request_goal()
+            goals.append(goal)
+            print("Objetivo añadido.")
+
     elif option == "2":
-        pass
+        if len(goals) == 0:
+            print("No hay objetivos añadidos.")
+        else:
+            plan = calculate_detail_plan()
+            show_detailed_plan(plan)
+
     elif option == "3":
-        pass
+        if len(goals) == 0:
+            print("No hay objetivos para guardar.")
+        else:
+            pass
+            # save_detail_plan()
+
     elif option == "4":
         print("Saliendo del planificador....")
         break
