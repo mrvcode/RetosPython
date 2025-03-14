@@ -122,8 +122,47 @@ print(s1.isalpha())
 print(s5.isalpha())  # no todos los caracteres son letras
 print(s5.isnumeric())  # el punto no se considera numérico
 print(s5.isalnum())  # el punto no se considera numérico ni letra
-
+print()
 
 """
 extra
 """
+
+
+def check(word1: str, word2: str):
+
+    # palíndromo
+
+    print(f"{word1} es un palíndromo?: {word1 == word1[::-1]}")
+    print(f"{word2} es un palíndromo?: {word2 == word2[::-1]}")
+
+    # anagramas
+
+    print(f"{word1} es anagrama de {word2}?: {sorted(word1) == sorted(word2)}")
+
+    # isogramas
+
+    def isogram(word: str) -> bool:
+
+        word_dict = dict()
+
+        for character in word:
+            word_dict[character] = word_dict.get(character, 0) + 1
+
+        isogram = True
+        values = list(word_dict.values())
+        isogram_len = values[0]
+        for word_count in values:
+            if word_count != isogram_len:
+                isogram = False
+                break
+
+        return isogram
+
+    print(f"{word1} es un isograma?: {isogram(word1)}")
+    print(f"{word2} es un isograma?: {isogram(word2)}")
+
+
+# check("radar", "python")
+# check("amor", "roma")
+check("radar", "pythonpythonpythonpython")
