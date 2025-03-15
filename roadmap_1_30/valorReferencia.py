@@ -55,3 +55,45 @@ def my_list_func(my_list: list):
 my_list_c = [40, 70]
 my_list_func(my_list_c)
 print(my_list_c)
+print()
+"""
+extra
+"""
+# por valor
+
+
+def value(value_a: int, value_b: int) -> tuple:
+    temp = value_a
+    value_a = value_b
+    value_b = temp
+    return value_a, value_b
+
+
+my_int_d = 72
+my_int_e = 43
+my_int_f, my_int_g = value(my_int_d, my_int_e)
+
+print(f"{my_int_d}, {my_int_e}")
+print(f"{my_int_f}, {my_int_g}")
+print()
+print()
+print()
+# referencia
+
+
+def ref(value_a: list, value_b: list) -> tuple:
+    temp = value_a
+    # temp.append(50)
+    value_a = value_b
+    value_b = temp
+    # value_b.append(50)
+    # value_a.append(50)
+    return value_a, value_b
+
+
+my_list_h = [10, 20]
+my_list_i = [30, 40]
+my_list_j, my_list_k = ref(my_list_h, my_list_i)
+
+print(f"{my_list_h}, {my_list_i}")
+print(f"{my_list_j}, {my_list_k}")
