@@ -50,6 +50,10 @@ class Employee:
     def add(self, employee):
         self.employees.append(employee)
 
+    def print_employees(self):
+        for employee in self.employees:
+            print(employee.name)
+
 
 class Manager(Employee):
 
@@ -59,8 +63,12 @@ class Manager(Employee):
 
 class ProjectManager(Employee):
 
+    def __init__(self, id: int, name: str, project: str):
+        super().__init__(id, name)
+        self.project = project
+
     def coordinate_project(self):
-        print(f"{self.name} esta coordinado su proyecto.")
+        print(f"{self.name} esta coordinado su {self.project}.")
 
 
 class Programmer(Employee):
@@ -72,7 +80,37 @@ class Programmer(Employee):
     def code(self):
         print(f"{self.name} esta programando en {self.language}")
 
-    def add(self, employee):
+    def add(self, employee: Employee):
         print(
-            f"Un programador no tiene empleados a su cargo. {employee} no se añadirá."
+            f"Un programador no tiene empleados a su cargo. {employee.name} no se añadirá."
         )
+
+
+# características de la empresa
+my_manager = Manager(1, "Miguel")
+my_project_manager = ProjectManager(2, "Carlos", "Proyecto 1")
+my_project_manager2 = ProjectManager(3, "Laura", "Proyecto 2")
+my_programmer = Programmer(4, "Estucius", "Swift")
+my_programmer2 = Programmer(5, "Ros", "Cobol")
+my_programmer3 = Programmer(6, "Falco", "Dart")
+my_programmer4 = Programmer(7, "Rebeca", "Python")
+
+# ejecuciones en la empresa
+my_manager.add(my_project_manager)
+my_manager.add(my_project_manager2)
+
+my_project_manager.add(my_programmer)
+my_project_manager.add(my_programmer2)
+
+my_project_manager2.add(my_programmer3)
+my_project_manager2.add(my_programmer3)
+
+my_programmer.add(my_programmer2)  # no se añadirá
+
+my_programmer.code()
+my_project_manager.coordinate_project()
+my_manager.coordinate_projects()
+
+my_manager.print_employees()
+my_project_manager.print_employees()
+my_programmer.print_employees()  # no imprimirá nada porque no se pudo añadir
